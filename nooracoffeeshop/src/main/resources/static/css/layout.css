@@ -1,0 +1,51 @@
+
+form{
+    
+    text-align: center;
+}
+
+
+.add{
+    margin: 1rem;
+    margin-right: 27rem ;
+}
+
+footer ul {
+  list-style: none;
+  padding-bottom: 20px;
+}
+footer li {
+  display: inline-block;
+}
+.strong {
+  font-size: 1.8rem;
+  font-weight: bolder;
+}
+/*facebook icon*/
+#somet1 {
+  padding-bottom: 40px;
+  letter-spacing: 20px;
+  color: #2d48be;
+  padding: 20px;
+}
+
+/*youtube icon*/
+#somet2 {
+  padding-bottom: 40px;
+  letter-spacing: 20px;
+  color: #be1111;
+  padding: 20px;
+}
+/*insta icon*/
+
+#somet3 {
+  padding-bottom: 40px;
+  letter-spacing: 20px;
+  color: #700c6b;
+  padding: 20px;
+}
+
+.center{
+        
+  margin: 1rem;
+}

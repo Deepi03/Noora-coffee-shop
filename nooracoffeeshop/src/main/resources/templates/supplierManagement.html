@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link  th:href="@{/css/layout.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<style>
+    input[type="text"]{
+        width: 50%;
+        margin: 1rem;
+       
+    }
+    input[type="email"]{
+        width: 50%;
+        margin: 1rem;
+    }
+    label{
+        margin-left: 1rem;
+    }
+   
+</style>
+</head>
+<body>
+
+    <header th:replace = "admin_fragments :: header" >
+
+    </header>
+    <main class="form-sign-in center ">
+        <h1 class="h3 mb-3 fw-normal ">
+            Supplier Management
+          </h1>
+           <form th:action="@{/admin/supplier}" method="post"> 
+          
+          <!-- Supplier name -->
+          <div class="form-floating">
+              <input type="text" class="form-control" id="floatingSupplierName" name="supplierName" placeholder="Supplier name">
+              <label for="floatingSupplierName">Supplier Name</label>
+          </div>
+          <!-- contact person mail -->
+          <div class="form-floating">
+              <input type="text" class="form-control" id="floatingContactMail" name="contactMail" placeholder="Contact Person Mail">
+              <label for="floatingContactPersonMail">Contact Person Mail</label>
+          </div>
+          <!-- contact person name -->
+          <div class="form-floating">
+              <input type="text" class="form-control" id="floatingContactName" name="contactName" placeholder="Contact Person Name">
+              <label for="floatingContactPersonName">Contact Person Name</label>
+          </div>
+
+          <button type="submit" class="btn btn-info add">Add</button>
+          </form>
+
+          <!-- Show products in table -->
+
+          <h3 class="home center">Show Products </h3>
+
+
+          <table class="table">
+           <thead>
+               <tr>
+                   <td scope="col">ID</td>
+                   <td scope="col">Supplier name</td>
+                   <td scope="col">Contact Person name</td>
+                   <td scope="col">Contact Person mail</td>
+                   <td scope="col">Action</td>
+                  
+               </tr>
+           </thead>
+           <tbody>
+                <tr th:each = "supplier:${suppliers}">
+                   <td th:text = "${supplier.id}">ID</td>
+                              
+                   <td th:text = "${supplier.name}">Supplier name</td>
+                   <td th:text = "${supplier.contactPersonName}">Contact person name</td>
+                   <td th:text = "${supplier.contactPersonEmail}">Contact person mail</td>
+                    <td> <a th:href="@{/updatesupplier/{id}(id=${supplier.id})}" title="updates the supplier"><i class="fas fa-pen-fancy pen"></i></a> </td>  
+                   <td><a th:href="@{/deletesupplier/{id}(id=${supplier.id})}" title="delete the supplier" ><i class="fas fa-trash-alt pen"></i></a></td>  
+               </tr>                
+               
+           </tbody>
+           </table>
+    </main>
+</body>
+</html>
+
