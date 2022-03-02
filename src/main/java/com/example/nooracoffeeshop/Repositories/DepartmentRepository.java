@@ -1,5 +1,7 @@
-package com.example.nooracoffeeshop.model;
+package com.example.nooracoffeeshop.Repositories;
 
+
+import com.example.nooracoffeeshop.model.Department;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

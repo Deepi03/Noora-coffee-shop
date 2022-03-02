@@ -31,6 +31,8 @@ public class Product  extends AbstractPersistable<Long>{
     @OneToMany
     private List<Image> images;
     
+    private Long productsSold;
+    
     @ManyToOne
     @ToString.Exclude
     private Department department;

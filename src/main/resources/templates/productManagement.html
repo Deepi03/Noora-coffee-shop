@@ -91,9 +91,10 @@
                 </div>
                 <!-- Product image -->
                 <div class="form-floating">
-                <label >File name:</label>  <input type="text" name="name"><br>
-                <label >Description:</label> <input type="text" name="description"><br>
-                <label>Choose image:</label> <input type="file" name="image" id="image">
+                 
+                  File name:  <input type="text" name="name"><br>
+                  Description:  <input type="text" name="description"><br>
+                  Choose image:  <input type="file" name="image" id="image">
               </div>
               <button type="submit" class="btn btn-info add">Add</button>
             </form>
@@ -130,7 +131,7 @@
                  <td th:text = "${product.department}">product department</td>
                 <td th:text = "${product.supplier}">product supplier</td>
                 <td th:text = "${product.manufacturer}">product manufacturer</td> 
-                <td> <a th:href="@{/updateproduct/{id}(id=${product.id})}" title="updates the product"><i class="fas fa-pen-fancy pen"></i></a> </td>  
+                <td> <a th:href="@{/updateproduct1/{id}(id=${product.id})}" title="updates the product"><i class="fas fa-pen-fancy pen"></i></a> </td>  
                <td><a th:href="@{/deleteproduct/{id}(id=${product.id})}" title="delete the product" ><i class="fas fa-trash-alt pen"></i></a></td>  
                 
             
