@@ -38,7 +38,7 @@ public class ManufacturerService {
     }
 
 
-    public void updateManufacturer(String manufacturerName,String manufacturerUrl,Long id){
+    public void updateManufacturer(Long id,String manufacturerName,String manufacturerUrl){
         Manufacturer existingManufacturer = manufacturerRepository.getById(id);
         existingManufacturer.setName(manufacturerName);
         existingManufacturer.setUrl(manufacturerUrl);

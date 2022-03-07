@@ -17,8 +17,10 @@ public class ManufacturerController {
     private ManufacturerService manufacturerService;
 
     // ***** Manufacturer management ******
+  
 
-    @GetMapping("/admin/manufacturerManagement")
+
+    @GetMapping("/user/admin/manufacturer")
     public String displayManufacturer(Model model){
 
       model.addAttribute("manufacturers", this.manufacturerService.listAll());
@@ -27,14 +29,13 @@ public class ManufacturerController {
       return "manufacturerManagement";
     }
 
-    @PostMapping("/admin/manufacturer")
+    @PostMapping("/user/admin/manufacturer")
     public String addManufacturer(@RequestParam String manufacturerName,@RequestParam String manufacturerUrl){
      this.manufacturerService.addManufacturer(manufacturerName, manufacturerUrl);
-    return "redirect:/anufacturerManagement";
+    return "redirect:/user/admin/manufacturer";
     }
 
-
-    // update supplier
+    // update manufacturer
 
     @GetMapping("/updatemanufacturer/{id}")
     public String showFormForUpdateManufacturer(@PathVariable Long id , Model model){
@@ -47,21 +48,21 @@ public class ManufacturerController {
     }
 
     @PostMapping("/updateManufacturer/{id}")
-    public String updateManufacturer(@RequestParam String manufacturerName,@RequestParam String manufacturerUrl ,@PathVariable Long id){
-      this.manufacturerService.updateManufacturer(manufacturerName, manufacturerUrl,id);
+    public String updateManufacturer(@PathVariable Long id,@RequestParam String manufacturerName,@RequestParam String manufacturerUrl){
+      this.manufacturerService.updateManufacturer(id,manufacturerName, manufacturerUrl);
 
-      return "redirect:/manufacturerManagement";
+      return "redirect:/user/admin/manufacturer";
 
     }
      
   
-    // Delete_supplier
+    // Delete_manufacturer
 
 
 @GetMapping("/deletemanufacturer/{id}")
 public String deleteManufacturer(@PathVariable Long id){
   this.manufacturerService.deleteManufacturer(id);
-  return "redirect:/manufacturerManagement";
+  return "redirect:/user/admin/manufacturer";
 }
     
 }

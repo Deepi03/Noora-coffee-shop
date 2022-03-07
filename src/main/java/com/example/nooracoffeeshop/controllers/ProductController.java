@@ -47,14 +47,14 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    // @GetMapping("/")
-    // public String topSellers(Model model){
+    @GetMapping("/")
+    public String topSellers(Model model){
 
-    //     Pageable pageable = PageRequest.of(0,9,Sort.by("productSold").descending());
-    //     model.addAttribute("products", this.productService.topSellers(pageable));
-    //     return ""
+        Pageable pageable = PageRequest.of(0,9,Sort.by("productSold").descending());
+        model.addAttribute("products", this.productService.topSellers(pageable));
+        return "index";
         
-    // }
+    }
 
 
     // @GetMapping("/coffeemachines")
@@ -85,7 +85,7 @@ public class ProductController {
     // ***** product management ******
 
 // add product
-@GetMapping("/admin/productManagement")
+@GetMapping("/user/admin/product")
 public String showProductAdditionForm(Model model){
       
    
@@ -99,7 +99,7 @@ public String showProductAdditionForm(Model model){
     
 }
 
-@PostMapping("/admin/product")
+@PostMapping("/user/admin/product")
 public String addProduct(@RequestParam Long manufacturerID, @RequestParam String productName , @RequestParam String productDescription , @RequestParam Long departmentID ,@RequestParam Long supplierID , @RequestParam  Double productPrice,@RequestParam String name,@RequestParam String description,@RequestParam("image") MultipartFile image ) throws IOException
 {
 
@@ -118,7 +118,7 @@ public String addProduct(@RequestParam Long manufacturerID, @RequestParam String
        product.setImages(Arrays.asList(image1));
        imageRepository.save(image1);
       productRepository.save(product);
-   return "productManagement";
+   return "redirect:/user/admin/product";
 }
 
 
@@ -126,12 +126,12 @@ public String addProduct(@RequestParam Long manufacturerID, @RequestParam String
 
 //update_product
 
-@GetMapping("/updateproduct1/{id}")
+@GetMapping("/user/admin/updateproduct/{id}")
 public String showFormForUpdateProduct(@PathVariable Long id , Model model){
 Product product = productRepository.getById(id);
 model.addAttribute("manufacturers",this.manufacturerService.listAll());
 model.addAttribute("departments",this.departmentService.listAll());
-model.addAttribute("suppliers", this.supplierService.getSupplier(id));
+model.addAttribute("suppliers", this.supplierService.listAll());
 
 model.addAttribute("product", product);
 return "updateproduct";
@@ -139,7 +139,7 @@ return "updateproduct";
 }
 
 
-@PostMapping("/updateproduct/{id}") 
+@PostMapping("/user/admin/updateproduct/{id}") 
 public String  updateProduct(@RequestParam Long manufacturerID, @RequestParam String productName , @RequestParam String productDescription , @RequestParam Long departmentID ,@RequestParam Long supplierID , @RequestParam  Double productPrice ,@PathVariable Long id){
 
 
@@ -155,17 +155,17 @@ public String  updateProduct(@RequestParam Long manufacturerID, @RequestParam St
 
   productRepository.save(existingProduct); 
 
-    return "(redirect:/productManagement)";
+    return "redirect:/user/admin/product";
  
 }
 
 // Delete_product
 
 
-@GetMapping("/deleteproduct/{id}")
+@GetMapping("/user/admin/deleteproduct/{id}")
 public String deleteProduct(@PathVariable Long id){
 productRepository.deleteById(id);
-return "productManagement";
+return "redirect:/user/admin/product";
 }
 
 

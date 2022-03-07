@@ -26,21 +26,21 @@
         <h1 class="h3 mb-3 fw-normal">
             Supplier Management
           </h1>
-           <form th:action="@{/updatesupplier/{id}(id=${supplier.id})}"  method="post"> 
+           <form th:action="@{/user/admin/updatesupplier/{id}(id=${supplier.id})}"  method="post"> 
           
           <!-- Supplier name -->
           <div class="form-floating">
-              <input type="text" class="form-control" id="floatingSupplierName" name="supplierName" placeholder="Supplier name" th:value="${supplier.name}">
+              <input type="text" class="form-control" id="floatingSupplierName" name="supplierName"  required placeholder="Supplier name" th:value="${supplier.name}">
               <label for="floatingSupplierName">Supplier Name</label>
           </div>
           <!-- contact person mail -->
           <div class="form-floating">
-              <input type="text" class="form-control" id="floatingContactMail" name="contactMail" placeholder="Contact Person Mail" th:value="${supplier.contactPersonEmail}">
+              <input type="text" class="form-control" id="floatingContactMail" name="contactMail"         required placeholder="Contact Person Mail" th:value="${supplier.contactPersonEmail}">
               <label for="floatingContactPersonMail">Contact Person Mail</label>
           </div>
           <!-- contact person name -->
           <div class="form-floating">
-              <input type="text" class="form-control" id="floatingContactName" name="contactName" placeholder="Contact Person Name" th:value="${supplier.contactPersonName}">
+              <input type="text" class="form-control" id="floatingContactName" name="contactName" required placeholder="Contact Person Name"  th:value="${supplier.contactPersonName}">
               <label for="floatingContactPersonName">Contact Person Name</label>
           </div>
 

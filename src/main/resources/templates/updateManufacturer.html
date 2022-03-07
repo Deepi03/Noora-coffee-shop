@@ -4,8 +4,12 @@
     <link  th:href="@{/css/layout.css}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<script defer="" src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
 <style>
+    a{
+        text-decoration: none;
+      }
+
     input[type="text"]{
         width: 50%;
         margin: 1rem;
@@ -22,29 +26,28 @@
 </style>
 </head>
 <body>
+     <!-- <section th:replace = "fragments/admin_fragments :: header" > 
+
+    </section> -->
     <main class="form-sign-in">
         <h1 class="h3 mb-3 fw-normal">
-            Supplier Management
+           Update Manufacturer 
           </h1>
            <form th:action="@{/updateManufacturer/{id}(id=${manufacturer.id})}"  method="post"> 
           
           <!-- Manufacturer name -->
           <div class="form-floating">
-              <input type="text" class="form-control" id="floatingManufacturerName" name="manufacturerName" placeholder="manufacturer name" th:value="${manufacturer.name}">
+              <input type="text" class="form-control" id="floatingManufacturerName" name="manufacturerName" required placeholder="manufacturer name" th:value="${manufacturer.name}">
               <label for="floatingManufacturerName">Manufacturer Name</label>
           </div>
           <!-- contact person mail -->
           <div class="form-floating">
-              <input type="text" class="form-control" id="floatingManufacturerUrl" name="manufacturerUrl" placeholder="Manufacturer Url" th:value="${manufacturer.url}">
+              <input type="text" class="form-control" id="floatingManufacturerUrl" name="manufacturerUrl" required placeholder="Manufacturer Url" th:value="${manufacturer.url}">
               <label for="floatingManufacturerUrl">Manufacturer Url</label>
           </div>
-          <!-- contact person name -->
-          <div class="form-floating">
-              <input type="text" class="form-control" id="floatingContactName" name="contactName" placeholder="Contact Person Name" th:value="${supplier.contactPersonName}">
-              <label for="floatingContactPersonName">Contact Person Name</label>
-          </div>
+          
 
-          <button type="submit" class="btn btn-info add">Add</button>
+          <button type="submit" class="btn btn-info add">Update</button>
           </form>
           </main>
 

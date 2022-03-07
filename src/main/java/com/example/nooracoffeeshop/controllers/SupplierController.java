@@ -27,22 +27,22 @@ public class SupplierController {
 
 
     //add supplier & display supplier table
-    @GetMapping("/admin/supplierManagement")
+    @GetMapping("/user/admin/supplier")
     public String displaySupplier(Model model){
       model.addAttribute("suppliers", this.supplierService.listAll());
       return "supplierManagement";
     }
 
-    @PostMapping("/admin/supplier")
+    @PostMapping("/user/admin/supplier")
     public String addSupplier(@RequestParam String supplierName,@RequestParam String contactMail ,@RequestParam String contactName){
       this.supplierService.addSupplier(supplierName, contactName, contactMail);
-      return "supplierManagement";
+      return "redirect:/user/admin/supplier";
     }
 
 
     // update supplier
 
-    @GetMapping("/updatesupplier/{id}")
+    @GetMapping("/user/admin/updatesupplier/{id}")
     public String showFormForUpdateSupplier(@PathVariable Long id , Model model){
   
       model.addAttribute("supplier", this.supplierService.getSupplier(id));
@@ -51,22 +51,22 @@ public class SupplierController {
 
     }
 
-    @PostMapping("/updatesupplier/{id}")
+    @PostMapping("/user/admin/updatesupplier/{id}")
     public String updateSupplier(@RequestParam String supplierName,@RequestParam String contactMail ,@RequestParam String contactName,@PathVariable Long id){
           
       this.supplierService.updateSupplier(id, supplierName, contactName, contactMail);
 
-      return "redirect:/supplierManagement";
+      return "redirect:/user/admin/supplier";
 
     }
 
     // Delete_supplier
 
 
-@GetMapping("/deletesupplier/{id}")
+@GetMapping("/user/admin/deletesupplier/{id}")
 public String deleteSupplier(@PathVariable Long id){
   this.supplierService.deleteSupplier(id);
-  return "redirect:/supplierManagement";
+  return "redirect:/user/admin/supplier";
 }
 
     

@@ -49,3 +49,24 @@ footer li {
         
   margin: 1rem;
 }
+a{
+  text-decoration: none;
+}
+input[type="text"]{
+  width: 50%;
+  margin: 1rem;
+
+
+ 
+}
+input[type="email"],input[type = "number"],input[type = "password"]{
+  width: 50%;
+  margin: 1rem;
+}
+label{
+  margin-left: 1rem;
+}
+
+.account{
+  margin: 1rem;
+}
