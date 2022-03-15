@@ -18,56 +18,52 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SupplierController {
 
+  @Autowired
+  private SupplierService supplierService;
 
+  // ***** supplier management ******
 
-    @Autowired
-    private SupplierService supplierService;
+  // add supplier & display supplier table
+  @GetMapping("/admin/supplier")
+  public String displaySupplier(Model model) {
+    model.addAttribute("suppliers", this.supplierService.listAll());
+    return "supplierManagement";
+  }
 
-    // ***** supplier management ******
+  @PostMapping("/admin/supplier")
+  public String addSupplier(@RequestParam String supplierName, @RequestParam String contactMail,
+      @RequestParam String contactName) {
+    this.supplierService.addSupplier(supplierName, contactName, contactMail);
+    return "redirect:/admin/supplier";
+  }
 
+  // update supplier
 
-    //add supplier & display supplier table
-    @GetMapping("/user/admin/supplier")
-    public String displaySupplier(Model model){
-      model.addAttribute("suppliers", this.supplierService.listAll());
-      return "supplierManagement";
-    }
+  @GetMapping("/admin/updatesupplier/{id}")
+  public String showFormForUpdateSupplier(@PathVariable Long id, Model model) {
 
-    @PostMapping("/user/admin/supplier")
-    public String addSupplier(@RequestParam String supplierName,@RequestParam String contactMail ,@RequestParam String contactName){
-      this.supplierService.addSupplier(supplierName, contactName, contactMail);
-      return "redirect:/user/admin/supplier";
-    }
+    model.addAttribute("supplier", this.supplierService.getSupplier(id));
 
+    return "updateSupplier";
 
-    // update supplier
+  }
 
-    @GetMapping("/user/admin/updatesupplier/{id}")
-    public String showFormForUpdateSupplier(@PathVariable Long id , Model model){
-  
-      model.addAttribute("supplier", this.supplierService.getSupplier(id));
+  @PostMapping("/admin/updatesupplier/{id}")
+  public String updateSupplier(@RequestParam String supplierName, @RequestParam String contactMail,
+      @RequestParam String contactName, @PathVariable Long id) {
 
-      return "updateSupplier";
+    this.supplierService.updateSupplier(id, supplierName, contactName, contactMail);
 
-    }
+    return "redirect:/admin/supplier";
 
-    @PostMapping("/user/admin/updatesupplier/{id}")
-    public String updateSupplier(@RequestParam String supplierName,@RequestParam String contactMail ,@RequestParam String contactName,@PathVariable Long id){
-          
-      this.supplierService.updateSupplier(id, supplierName, contactName, contactMail);
+  }
 
-      return "redirect:/user/admin/supplier";
+  // Delete_supplier
 
-    }
+  @GetMapping("/admin/deletesupplier/{id}")
+  public String deleteSupplier(@PathVariable Long id) {
+    this.supplierService.deleteSupplier(id);
+    return "redirect:/admin/supplier";
+  }
 
-    // Delete_supplier
-
-
-@GetMapping("/user/admin/deletesupplier/{id}")
-public String deleteSupplier(@PathVariable Long id){
-  this.supplierService.deleteSupplier(id);
-  return "redirect:/user/admin/supplier";
-}
-
-    
 }

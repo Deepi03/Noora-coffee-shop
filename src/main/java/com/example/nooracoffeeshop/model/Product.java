@@ -1,7 +1,5 @@
 package com.example.nooracoffeeshop.model;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 
@@ -23,16 +21,16 @@ import javax.persistence.OneToMany;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product  extends AbstractPersistable<Long>{
+public class Product extends AbstractPersistable<Long> {
 
     private String name;
     private String description;
     private Double price;
     @OneToMany
     private List<Image> images;
-    
-    private Long productsSold;
-    
+
+    private Long productSold;
+
     @ManyToOne
     @ToString.Exclude
     private Department department;
@@ -45,8 +43,4 @@ public class Product  extends AbstractPersistable<Long>{
     @ToString.Exclude
     private Manufacturer manufacturer;
 
-    
-
-    
-    
 }

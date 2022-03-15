@@ -26,14 +26,14 @@
 </head>
 <body>
 
-    <section th:replace = "fragments/admin_fragments :: header" >
+    <section th:replace = "admin_fragments :: header" >
 
     </section>
     <main class="form-sign-in center ">
         <h1 class="h3 mb-3 fw-normal ">
             Supplier Management
           </h1>
-           <form th:action="@{/user/admin/supplier}" method="post"> 
+           <form th:action="@{/admin/supplier}" method="post"> 
           
           <!-- Supplier name -->
           <div class="form-floating">
@@ -77,15 +77,15 @@
                    <td th:text = "${supplier.name}">Supplier name</td>
                    <td th:text = "${supplier.contactPersonName}">Contact person name</td>
                    <td th:text = "${supplier.contactPersonEmail}">Contact person mail</td>
-                    <td> <a th:href="@{/user/admin/updatesupplier/{id}(id=${supplier.id})}" title="updates the supplier"><i class="fas fa-pen-fancy pen"></i></a> </td>  
-                   <td><a th:href="@{/user/admin/deletesupplier/{id}(id=${supplier.id})}" title="delete the supplier" ><i class="fas fa-trash-alt pen"></i></a></td>  
+                    <td> <a th:href="@{/admin/updatesupplier/{id}(id=${supplier.id})}" title="updates the supplier"><i class="fas fa-pen-fancy pen"></i></a> </td>  
+                   <td><a th:href="@{/admin/deletesupplier/{id}(id=${supplier.id})}" title="delete the supplier" ><i class="fas fa-trash-alt pen"></i></a></td>  
                </tr>                
                
            </tbody>
            </table>
     </main>
 
-    <section th:replace = "fragments/admin_fragments :: footer">
+    <section th:replace = "admin_fragments :: footer">
 
     </section>
 </body>

@@ -16,7 +16,7 @@
 
 
   <main class="form-sign-in">
-  <form th:action="@{/user/admin/updateproduct/{id}(id=${product.id})}" method="post"> 
+  <form th:action="@{/admin/updateproduct/{id}(id=${product.id})}" method="post"> 
     <!-- Choosing manufacturer -->
     <div class="form-floating">
         <select class="form-select" name="manufacturerID" required="true" >

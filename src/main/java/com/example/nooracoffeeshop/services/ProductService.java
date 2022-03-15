@@ -35,76 +35,75 @@ public class ProductService {
     private ManufacturerRepository manufacturerRepository;
 
     @Autowired
-   private ImageRepository imageRepository;
+    private ImageRepository imageRepository;
 
-    public Page<Product> topSellers(Pageable pageable){
+    public Page<Product> topSellers(Pageable pageable) {
         return productRepository.findAll(pageable);
-        }
+    }
 
-    public List<Product> getAllCoffeeMachines(List<Long> coffeemachines){
+    public List<Product> getAllCoffeeMachines(List<Long> coffeemachines) {
         List<Product> products = productRepository.findByDepartment_idIn(coffeemachines);
         return products;
     }
 
-    public List<Product> getAllConsumerProducts(List<Long> consumerProducts){
+    public List<Product> getAllConsumerProducts(List<Long> consumerProducts) {
         List<Product> products = productRepository.findByDepartment_idIn(consumerProducts);
         return products;
     }
 
-
-    public List<Product> getAllCoffees(List<Long> coffees){
+    public List<Product> getAllCoffees(List<Long> coffees) {
         List<Product> products = productRepository.findByDepartment_idIn(coffees);
         return products;
     }
 
-    public List<Product> listAll(){
-            return productRepository.findAll();
-        }
-    
-    public Product getProduct(Long id){
-            return productRepository.getById(id);
-        }
+    public List<Product> listAll() {
+        return productRepository.findAll();
+    }
 
-    public void addProduct( Long manufacturerID,String productName,String productDescription,Long departmentID ,Long supplierID ,Double productPrice,String name,String description,MultipartFile image,Long productsSold) throws IOException{
+    public Product getProduct(Long id) {
+        return productRepository.getById(id);
+    }
 
+    public void addProduct(Long manufacturerID, String productName, String productDescription, Long departmentID,
+            Long supplierID, Double productPrice, String name, String description, MultipartFile image,
+            Long productsSold) throws IOException {
 
         Product product = new Product();
-           Image image1 = new Image();
-           image1.setName(name);
-           image1.setDescription(description);
-           image1.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-           product.setName(productName);
-           product.setPrice(productPrice);
-           product.setDescription(productDescription);
-           product.setDepartment(departmentRepository.getById(manufacturerID));
-           product.setManufacturer(manufacturerRepository.getById(manufacturerID));
-           product.setSupplier(supplierRepository.getById(supplierID));
-           product.setProductsSold(productsSold);
-           product.setImages(Arrays.asList(image1));
-           imageRepository.save(image1);
-          productRepository.save(product);
+        Image image1 = new Image();
+        image1.setName(name);
+        image1.setDescription(description);
+        image1.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+        product.setName(productName);
+        product.setPrice(productPrice);
+        product.setDescription(productDescription);
+        product.setDepartment(departmentRepository.getById(manufacturerID));
+        product.setManufacturer(manufacturerRepository.getById(manufacturerID));
+        product.setSupplier(supplierRepository.getById(supplierID));
+        product.setProductSold(productsSold);
+        product.setImages(Arrays.asList(image1));
+        imageRepository.save(image1);
+        productRepository.save(product);
     }
 
-
-    public void updateProduct(Long manufacturerID,String productName,String productDescription,Long departmentID ,Long supplierID ,Double productPrice,String name,String description,MultipartFile image,Long productsSold,Long id) throws IOException{
+    public void updateProduct(Long manufacturerID, String productName, String productDescription, Long departmentID,
+            Long supplierID, Double productPrice, String name, String description, MultipartFile image,
+            Long productsSold, Long id) throws IOException {
         Product existingProduct = productRepository.getById(id);
- 
-       existingProduct.setDepartment(departmentRepository.getById(manufacturerID));
-       existingProduct.setManufacturer(manufacturerRepository.getById(manufacturerID));
-       existingProduct.setSupplier(supplierRepository.getById(supplierID));
-       existingProduct.setName(productName);
-       existingProduct.setPrice(productPrice);
-       existingProduct.setDescription(productDescription);
-      existingProduct.setProductsSold(productsSold);
 
+        existingProduct.setDepartment(departmentRepository.getById(manufacturerID));
+        existingProduct.setManufacturer(manufacturerRepository.getById(manufacturerID));
+        existingProduct.setSupplier(supplierRepository.getById(supplierID));
+        existingProduct.setName(productName);
+        existingProduct.setPrice(productPrice);
+        existingProduct.setDescription(productDescription);
+        existingProduct.setProductSold(productsSold);
 
-      productRepository.save(existingProduct); 
-
+        productRepository.save(existingProduct);
 
     }
-    
-    public void deleteProduct(Long id){
+
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
-    
+
 }

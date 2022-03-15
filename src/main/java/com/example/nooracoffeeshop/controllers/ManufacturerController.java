@@ -13,56 +13,51 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ManufacturerController {
 
-    @Autowired
-    private ManufacturerService manufacturerService;
+  @Autowired
+  private ManufacturerService manufacturerService;
 
-    // ***** Manufacturer management ******
-  
+  // ***** Manufacturer management ******
 
+  @GetMapping("/admin/manufacturer")
+  public String displayManufacturer(Model model) {
 
-    @GetMapping("/user/admin/manufacturer")
-    public String displayManufacturer(Model model){
+    model.addAttribute("manufacturers", this.manufacturerService.listAll());
 
-      model.addAttribute("manufacturers", this.manufacturerService.listAll());
+    return "manufacturerManagement";
+  }
 
+  @PostMapping("/admin/manufacturer")
+  public String addManufacturer(@RequestParam String manufacturerName, @RequestParam String manufacturerUrl) {
+    this.manufacturerService.addManufacturer(manufacturerName, manufacturerUrl);
+    return "redirect:/admin/manufacturer";
+  }
 
-      return "manufacturerManagement";
-    }
+  // update manufacturer
 
-    @PostMapping("/user/admin/manufacturer")
-    public String addManufacturer(@RequestParam String manufacturerName,@RequestParam String manufacturerUrl){
-     this.manufacturerService.addManufacturer(manufacturerName, manufacturerUrl);
-    return "redirect:/user/admin/manufacturer";
-    }
+  @GetMapping("/admin/updatemanufacturer/{id}")
+  public String showFormForUpdateManufacturer(@PathVariable Long id, Model model) {
 
-    // update manufacturer
+    model.addAttribute("manufacturer", this.manufacturerService.getManufacturer(id));
 
-    @GetMapping("/updatemanufacturer/{id}")
-    public String showFormForUpdateManufacturer(@PathVariable Long id , Model model){
-  
-     
-      model.addAttribute("manufacturer", this.manufacturerService.getManufacturer(id));
+    return "updateManufacturer";
 
-      return "updateManufacturer";
+  }
 
-    }
+  @PostMapping("/admin/updateManufacturer/{id}")
+  public String updateManufacturer(@PathVariable Long id, @RequestParam String manufacturerName,
+      @RequestParam String manufacturerUrl) {
+    this.manufacturerService.updateManufacturer(id, manufacturerName, manufacturerUrl);
 
-    @PostMapping("/updateManufacturer/{id}")
-    public String updateManufacturer(@PathVariable Long id,@RequestParam String manufacturerName,@RequestParam String manufacturerUrl){
-      this.manufacturerService.updateManufacturer(id,manufacturerName, manufacturerUrl);
+    return "redirect:/admin/manufacturer";
 
-      return "redirect:/user/admin/manufacturer";
+  }
 
-    }
-     
-  
-    // Delete_manufacturer
+  // Delete_manufacturer
 
+  @GetMapping("/admin/deletemanufacturer/{id}")
+  public String deleteManufacturer(@PathVariable Long id) {
+    this.manufacturerService.deleteManufacturer(id);
+    return "redirect:/admin/manufacturer";
+  }
 
-@GetMapping("/deletemanufacturer/{id}")
-public String deleteManufacturer(@PathVariable Long id){
-  this.manufacturerService.deleteManufacturer(id);
-  return "redirect:/user/admin/manufacturer";
-}
-    
 }

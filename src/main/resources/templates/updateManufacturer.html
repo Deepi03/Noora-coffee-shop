@@ -25,15 +25,16 @@
    
 </style>
 </head>
-<body>
-     <!-- <section th:replace = "fragments/admin_fragments :: header" > 
+<body>   
+    <section th:replace = "admin_fragments :: header" > 
 
-    </section> -->
+    </section>
+  
     <main class="form-sign-in">
         <h1 class="h3 mb-3 fw-normal">
            Update Manufacturer 
           </h1>
-           <form th:action="@{/updateManufacturer/{id}(id=${manufacturer.id})}"  method="post"> 
+           <form th:action="@{/admin/updateManufacturer/{id}(id=${manufacturer.id})}"  method="post"> 
           
           <!-- Manufacturer name -->
           <div class="form-floating">
@@ -51,6 +52,6 @@
           </form>
           </main>
 
-          
+          <section th:replace = "admin_fragments :: footer"></section>
           </body>
           </html>
