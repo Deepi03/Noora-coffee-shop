@@ -6,11 +6,11 @@ import java.util.Base64;
 import java.util.List;
 
 import com.example.nooracoffeeshop.Repositories.DepartmentRepository;
-import com.example.nooracoffeeshop.Repositories.ImageRepository;
+// import com.example.nooracoffeeshop.Repositories.ImageRepository;
 import com.example.nooracoffeeshop.Repositories.ManufacturerRepository;
 import com.example.nooracoffeeshop.Repositories.ProductRepository;
 import com.example.nooracoffeeshop.Repositories.SupplierRepository;
-import com.example.nooracoffeeshop.model.Image;
+// import com.example.nooracoffeeshop.model.Image;
 import com.example.nooracoffeeshop.model.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +34,8 @@ public class ProductService {
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
-    @Autowired
-    private ImageRepository imageRepository;
+    // @Autowired
+    // private ImageRepository imageRepository;
 
     public Page<Product> topSellers(Pageable pageable) {
         return productRepository.findAll(pageable);
@@ -65,38 +65,33 @@ public class ProductService {
     }
 
     public void addProduct(Long manufacturerID, String productName, String productDescription, Long departmentID,
-            Long supplierID, Double productPrice, String name, String description, MultipartFile image,
-            Long productsSold) throws IOException {
+            Long supplierID, Double productPrice,
+            String imageName) throws IOException {
 
         Product product = new Product();
-        Image image1 = new Image();
-        image1.setName(name);
-        image1.setDescription(description);
-        image1.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+
         product.setName(productName);
         product.setPrice(productPrice);
         product.setDescription(productDescription);
-        product.setDepartment(departmentRepository.getById(manufacturerID));
+        product.setDepartment(departmentRepository.getById(departmentID));
         product.setManufacturer(manufacturerRepository.getById(manufacturerID));
         product.setSupplier(supplierRepository.getById(supplierID));
-        product.setProductSold(productsSold);
-        product.setImages(Arrays.asList(image1));
-        imageRepository.save(image1);
+        product.setImageName(imageName);
+
         productRepository.save(product);
     }
 
-    public void updateProduct(Long manufacturerID, String productName, String productDescription, Long departmentID,
-            Long supplierID, Double productPrice, String name, String description, MultipartFile image,
-            Long productsSold, Long id) throws IOException {
+    public void updateProduct(Long id, Long manufacturerID, String productName, String productDescription,
+            Long departmentID,
+            Long supplierID, Double productPrice) {
         Product existingProduct = productRepository.getById(id);
 
-        existingProduct.setDepartment(departmentRepository.getById(manufacturerID));
+        existingProduct.setDepartment(departmentRepository.getById(departmentID));
         existingProduct.setManufacturer(manufacturerRepository.getById(manufacturerID));
         existingProduct.setSupplier(supplierRepository.getById(supplierID));
         existingProduct.setName(productName);
         existingProduct.setPrice(productPrice);
         existingProduct.setDescription(productDescription);
-        existingProduct.setProductSold(productsSold);
 
         productRepository.save(existingProduct);
 

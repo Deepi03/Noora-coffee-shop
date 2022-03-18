@@ -1,6 +1,5 @@
 package com.example.nooracoffeeshop.controllers;
 
-import com.example.nooracoffeeshop.Repositories.ImageRepository;
 import com.example.nooracoffeeshop.Repositories.ProductRepository;
 import com.example.nooracoffeeshop.services.DepartmentService;
 import com.example.nooracoffeeshop.services.ManufacturerService;

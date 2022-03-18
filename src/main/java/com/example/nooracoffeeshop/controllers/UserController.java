@@ -68,7 +68,7 @@ public class UserController {
         String password = user.getPassword();
         user.setPassword(bCryptPasswordEncoder.encode(password));
         List<Role> roles = new ArrayList<>();
-        roles.add(roleRepository.findById(2).get());
+        roles.add(roleRepository.findById(1).get());
 
         user.setRoles(roles);
         userRepository.save(user);

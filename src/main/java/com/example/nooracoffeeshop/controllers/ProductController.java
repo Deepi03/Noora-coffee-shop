@@ -1,15 +1,19 @@
 package com.example.nooracoffeeshop.controllers;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
-import com.example.nooracoffeeshop.Repositories.ImageRepository;
+// import com.example.nooracoffeeshop.Repositories.ImageRepository;
 import com.example.nooracoffeeshop.Repositories.ProductRepository;
-import com.example.nooracoffeeshop.model.Image;
+
 import com.example.nooracoffeeshop.model.Product;
 import com.example.nooracoffeeshop.services.DepartmentService;
+// import com.example.nooracoffeeshop.services.ImageService;
 import com.example.nooracoffeeshop.services.ManufacturerService;
 import com.example.nooracoffeeshop.services.ProductService;
 import com.example.nooracoffeeshop.services.SupplierService;
@@ -20,6 +24,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class ProductController {
 
+    public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
     @Autowired
     private ProductService productService;
 
@@ -41,8 +47,8 @@ public class ProductController {
     @Autowired
     private SupplierService supplierService;
 
-    @Autowired
-    private ImageRepository imageRepository;
+    // @Autowired
+    // private ImageRepository imageRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -50,8 +56,9 @@ public class ProductController {
     @GetMapping("/")
     public String topSellers(Model model) {
 
-        Pageable pageable = PageRequest.of(0, 9, Sort.by("productSold").descending());
-        model.addAttribute("products", this.productService.topSellers(pageable));
+        // Pageable pageable = PageRequest.of(0, 9,
+        // Sort.by("productSold").descending());
+        // model.addAttribute("products", this.productService.topSellers(pageable));
         return "index";
 
     }
@@ -92,6 +99,7 @@ public class ProductController {
         model.addAttribute("departments", departmentService.listAll());
         model.addAttribute("suppliers", supplierService.listAll());
         model.addAttribute("products", productService.listAll());
+        model.addAttribute("product", new Product());
 
         // also displaying product table
         return "productManagement";
@@ -101,23 +109,24 @@ public class ProductController {
     @PostMapping("/admin/product")
     public String addProduct(@RequestParam Long manufacturerID, @RequestParam String productName,
             @RequestParam String productDescription, @RequestParam Long departmentID, @RequestParam Long supplierID,
-            @RequestParam Double productPrice, @RequestParam String name, @RequestParam String description,
-            @RequestParam("image") MultipartFile image) throws IOException {
+            @RequestParam Double productPrice,
+            @RequestParam("productImage") MultipartFile file,
+            @RequestParam("imgName") String imgName, Model model) throws IOException {
 
         Product product = new Product();
-        Image image1 = new Image();
-        image1.setName(name);
-        image1.setDescription(description);
-        image1.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-        product.setName(productName);
-        product.setPrice(productPrice);
-        product.setDescription(productDescription);
-        product.setDepartment(this.departmentService.getDepartment(departmentID));
-        product.setManufacturer(this.manufacturerService.getManufacturer(manufacturerID));
-        product.setSupplier(this.supplierService.getSupplier(supplierID));
-        product.setImages(Arrays.asList(image1));
-        imageRepository.save(image1);
-        productRepository.save(product);
+        String imageUUID;
+        if (!file.isEmpty()) {
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        } else {
+            imageUUID = imgName;
+        }
+        product.setImageName(imageUUID);
+        productService.addProduct(manufacturerID, productName, productDescription, departmentID, supplierID,
+                productPrice,
+                imageUUID);
+
         return "redirect:/admin/product";
     }
 
@@ -136,20 +145,14 @@ public class ProductController {
     }
 
     @PostMapping("/admin/updateproduct/{id}")
-    public String updateProduct(@RequestParam Long manufacturerID, @RequestParam String productName,
-            @RequestParam String productDescription, @RequestParam Long departmentID, @RequestParam Long supplierID,
-            @RequestParam Double productPrice, @PathVariable Long id) {
+    public String updateProduct(@PathVariable Long id, @RequestParam Long manufacturerID,
+            @RequestParam String productName,
+            @RequestParam String productDescription, @RequestParam Long departmentID,
+            @RequestParam Long supplierID,
+            @RequestParam Double productPrice) {
 
-        Product existingProduct = productRepository.getById(id);
-
-        existingProduct.setDepartment(this.departmentService.getDepartment(departmentID));
-        existingProduct.setManufacturer(this.manufacturerService.getManufacturer(manufacturerID));
-        existingProduct.setSupplier(this.supplierService.getSupplier(supplierID));
-        existingProduct.setName(productName);
-        existingProduct.setPrice(productPrice);
-        existingProduct.setDescription(productDescription);
-
-        productRepository.save(existingProduct);
+        this.productService.updateProduct(id, manufacturerID, productName, productDescription, departmentID, supplierID,
+                productPrice);
 
         return "redirect:/admin/product";
 
