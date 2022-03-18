@@ -1,0 +1,6 @@
+2022-03-18 09:57:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "STRINGDECODE('Philips 3200 Series Fully Automatic Espresso Machine w/ LatteGo, Black, EP3241/54 \r\nEnjoy 5 coffees,Intuitive to... (326)"; SQL statement:
+insert into product (department_id, description, image_name, manufacturer_id, name, price, supplier_id, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22001-200]
+2022-03-18 11:18:33 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Filter coffee (or American style) is a slow pleasure, often associated with the idea of a quiet and prolonged break, the ideal ... (318)"; SQL statement:
+insert into product (department_id, description, image_name, manufacturer_id, name, price, supplier_id, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22001-200]
