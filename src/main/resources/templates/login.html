@@ -22,13 +22,13 @@
     />
     <title>Login</title>
   </head>
-  <body style="background-color: antiquewhite;">
+  <body style="background-color: #f1f5f8;">
     <section th:replace="fragment :: header"></section>
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
           <h2>Login</h2>
-          <p>Please fill out this to login</p>
+
           <form th:action="@{/login}" method="post">
             <div class="form-group">
               <label for="email">Email</label>
@@ -55,7 +55,11 @@
               Invalid username or password.
             </div>
 
-            <input type="submit" value="Login" class="btn btn-block btn-dark" />
+            <input
+              type="submit"
+              value="Login"
+              class="btn btn-block btn-warning"
+            />
             <br />
             <span>
               Don't have an account

@@ -20,10 +20,12 @@ import com.example.nooracoffeeshop.services.SupplierService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,14 +55,44 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping("/")
-    public String topSellers(Model model) {
+    @GetMapping({ "/", "/index" })
+    public String index(Model model) {
 
-        // Pageable pageable = PageRequest.of(0, 9,
-        // Sort.by("productSold").descending());
-        // model.addAttribute("products", this.productService.topSellers(pageable));
+        // model.addAttribute("products", this.productService.listAll());
+        // return "index";
+
+        return findPaginagted(0, model, null);
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam String keyword) {
+
+        // model.addAttribute("products", this.productService.listAll());
+        // return "index";
+        System.out.println("*******" + keyword + "******");
+        return findPaginagted(0, model, keyword);
+    }
+
+    @GetMapping("/index/page/{pageno}")
+    public String findPaginagted(@PathVariable int pageno, Model model, @Param("keyword") String keyword) {
+
+        if (keyword != null) {
+            System.out.println("*****" + pageno + "*****");
+            Page<Product> productList = productService.getProductPaginate(pageno, 6);
+            model.addAttribute("products", productService.listAll(keyword));
+            model.addAttribute("currentPage", pageno);
+            model.addAttribute("totalPages", productList.getTotalPages());
+            model.addAttribute("totalItem", productList.getTotalElements());
+
+        } else {
+            Page<Product> productList = productService.getProductPaginate(pageno, 6);
+            model.addAttribute("products", productList);
+            model.addAttribute("currentPage", pageno);
+            model.addAttribute("totalPages", productList.getTotalPages());
+            System.out.println("****" + productList.getTotalPages() + "*****");
+            model.addAttribute("totalItem", productList.getTotalElements());
+        }
         return "index";
-
     }
 
     @GetMapping("/coffeemachines")

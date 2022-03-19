@@ -1,24 +1,134 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Noora's Coffee Shop</title>
     <link th:href="@{/css/layout.css}" rel="stylesheet" />
 
     <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
-    />
+    /> -->
   </head>
 
-  <body>
+  <body style="background-color:#F1F5F8">
     <section th:replace="fragment :: header"></section>
+    <div class="conatiner" style="margin:2rem 10rem">
+      <div class="row">
+        <!-- <div class="col-sm-3 pt-4">
+           <form th:action="@{/search}" class="form-inline mb-2">
+            <div>
+              <input
+                type="text"
+                id="txtSearch"
+                name="keyword"
+                class="form-control"
+              />
+            </div>
+            <div>
+              <input
+                style="background-color: #ffc107 !important; color: black;margin-left: 1rem;"
+                @keypress.enter.prevent
+                type="submit"
+                value="Go"
+                class="btn form-control"
+              />
+            </div>
+          </form>
+          </div> -->
+          <div class="col-sm-9">
+            <div
+              class="card"
+              style="margin-top: 20px;padding: 1rem;border: lightgrey 2px solid;"
+              th:each="product : ${products}"
+            >
+              <div
+                class="row no-gutters"
+              >
+                <div
+                  class="col sm-5 d-flex justify-content-center"
+                  style="padding: 30px;"
+                >
+                  <img
+                    style="max-width: 100%"
+                    th:src="@{${'/productImages/' + product.imageName}}"
+                    th:alt="${product.name}"
+                  />
+                </div>
+                <div class="col-sm-7 d-flex justify-content-center">
+                  <div class="card-body">
+                    <h3 class="card-title h3" th:text="${product.name}"></h3>
+                    <h4>
+                      Price: €
+                      <span th:text="${product.price}"></span>
+                    </h4>
+                    <p th:text="${product.description}"></p>
+                    <a href=""
+                    
+                    class="btn btn-warning" style="color: black;">View product</a>
+                    <a href=""  class="btn btn-warning" style="color: black;">Add to cart</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h1>Top Sellers</h1>
+    <div class="mt-2">
+      <nav aria-label="Page navigation ">
+        <p class="float-left mt-1">Total Product: [[${totalItem}]]</p>
+        <ul class="pagination d-flex justify-content-end">
+          <li th:if="${currentPage != 0}" class="page-item">
+            <a th:href="@{'/index/page/' + ${currentPage-1}}" class="page-link">Previous</a>
+          </li>
+          <li th:each = "i:${#numbers.sequence(1,totalPages)}"
+              th:classappend = "${currentPage == i-1 ? 'active' : ''}"
+              class="page-item">
+              <a th:href="@{'/index/page/' + ${i-1}}">[[${i}]]</a>
+          </li>
+          <li th:if="${currentPage+1 != totalPages}" class="page-item">
+            <a th:href="@{'/index/page/' + ${currentPage + 1}}">Next</a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
 
     <!-- <section th:replace="admin_fragments :: footer"></section> -->
     <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="ahhnonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha38 -wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
@@ -28,6 +138,6 @@
       src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
       integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
   </body>
 </html>

@@ -16,6 +16,7 @@ import com.example.nooracoffeeshop.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -101,4 +102,15 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    public Page<Product> getProductPaginate(int currentPage, int size) {
+        PageRequest pageable = PageRequest.of(currentPage, size);
+        return productRepository.findAll(pageable);
+    }
+
+    public List<Product> listAll(String keyword) {
+        if (keyword != null) {
+            return productRepository.findByNameContainingIgnoreCase(keyword);
+        }
+        return productRepository.findAll();
+    }
 }
