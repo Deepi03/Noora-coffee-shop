@@ -23,6 +23,61 @@
 
   <body style="background-color: #f1f5f8;">
     <section th:replace="fragment :: header"></section>
-    <h3>view product</h3>
+    <div class="container mt-5">
+      <div
+        class="row"
+        style="
+          margin-top: 20px;
+          padding: 1rem;
+          border: lightgrey 2px solid;
+          margin-left: 60px;
+          margin-right: 54px;
+        "
+      >
+        <div
+          class="col-sm-5 d-flex justify-content-center"
+          style="padding-bottom: 50px;"
+        >
+          <img
+            class="mt-5"
+            height="auto"
+            width="300px"
+            src=""
+            th:src="@{${'/productImages/' + product.imageName}}"
+            alt=""
+            style=""
+          />
+        </div>
+        <div class="col-sm-7 mt-5">
+          <h2 th:text="${product.name}"></h2>
+          <p th:text="${product.department.name}"></p>
+          <h2>
+            €
+            <span th:text="${product.price}"></span>
+          </h2>
+
+          <p th:text="${product.description}"></p>
+          <a href="" class="btn btn-warning">
+            Add to cart
+          </a>
+          <!-- <h4>
+            <a
+              class="btn"
+              th:href="${product.manufacturer.url}"
+              th:text="${product.manufacturer.name}"
+              target="_blank"
+              style="
+                text-decoration: none;
+                background-color: #d67d3e !important;
+                color: #9c0f48;
+                height: auto;
+                width: 100px;
+                margin-top: 20px;
+              "
+            ></a>
+          </h4> -->
+        </div>
+      </div>
+    </div>
   </body>
 </html>

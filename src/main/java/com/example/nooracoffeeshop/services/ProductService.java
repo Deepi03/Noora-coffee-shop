@@ -35,33 +35,13 @@ public class ProductService {
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
-    // @Autowired
-    // private ImageRepository imageRepository;
-
-    public Page<Product> topSellers(Pageable pageable) {
-        return productRepository.findAll(pageable);
-    }
+    // public Page<Product> topSellers(Pageable pageable) {
+    // return productRepository.findAll(pageable);
+    // }
 
     public List<Product> getAllProductsByDepartmentId(Long departmentId) {
         return productRepository.findAllByDepartment_Id(departmentId);
     }
-
-    // public List<Product> getAllCoffeeMachines(List<Long> coffeemachines) {
-    // List<Product> products =
-    // productRepository.findByDepartment_idIn(coffeemachines);
-    // return products;
-    // }
-
-    // public List<Product> getAllConsumerProducts(List<Long> consumerProducts) {
-    // List<Product> products =
-    // productRepository.findByDepartment_idIn(consumerProducts);
-    // return products;
-    // }
-
-    // public List<Product> getAllCoffees(List<Long> coffees) {
-    // List<Product> products = productRepository.findByDepartment_idIn(coffees);
-    // return products;
-    // }
 
     public List<Product> listAll() {
         return productRepository.findAll();
