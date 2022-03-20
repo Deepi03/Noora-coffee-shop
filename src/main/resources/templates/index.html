@@ -53,10 +53,10 @@
                       <span th:text="${product.price}"></span>
                     </h4>
                     <p th:text="${product.description}"></p>
-                    <a href=""
+                    <a th:href="@{/index/viewproduct/{id}(id=${product.id})}"
                     
                     class="btn btn-warning" style="color: black;">View product</a>
-                    <a th:href="@{/index/viewproduct/{id}(id=${product.id})}"  class="btn btn-warning" style="color: black;">Add to cart</a>
+                    <a   class="btn btn-warning" style="color: black;">Add to cart</a>
                   </div>
                 </div>
               </div>
