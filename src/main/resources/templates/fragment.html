@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Noora's Coffee Shop</title>
-    <link th:href="@{/css/layout.css}" rel="stylesheet" />
+    <!-- <link th:href="@{/css/layout.css}" rel="stylesheet" /> -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -27,96 +27,99 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
           >
             <a
+            style="margin-left: 21rem;"
               th:href="@{/}"
-              class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+              class="d-flex align-items-center justify-content-center mb-2 mb-lg-0 text-warning text-decoration-none"
             >
-              <h4 style="color: black;">Noora coffee shop</h4>
+              <h2>Noora coffee shop</h2>
             </a>
-
-            <ul
-              class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-            >
-              <li>
-                <a th:href="@{/coffeemachines}" class="nav-link px-2 text-dark">
-                  Coffee Machines
-                </a>
-              </li>
-              <li>
-                <a
-                  th:href="@{/consumerproducts}"
-                  class="nav-link px-2 text-dark"
+            <div class="d-flex flex-wrap nav-link px-2 text-dark" style="margin-left: 45px;margin-top:10px;">
+                <form th:action="@{/search}" class="form-inline mb-2 form-floating">
+                  <div class="">
+                    <input
+                      type="text"
+                      id="txtSearch"
+                      name="keyword"
+                      class="form-control-sm border-0 ml-2"
+                      placeholder="Search"
+                    />
+                    
+                  </div>
+                  <div>
+                    <input
+                      style="color: black;margin-left: 0.25rem;font-size: 0.7rem;"
+                      @keypress.enter.prevent
+                      type="submit"
+                      value="Go"
+                      class="btn-sm btn-warning form-control"
+                    />
+                  </div>
+                </form>
+              </div>
+            <div style=" margin-left: 220px;">
+  
+              <ul
+                class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mx-3"
+              >
+                <div
+                  class="nav-link px-2 text-dark "
+                  th:each="department , iStat: ${departments}"
                 >
-                  Consumer Products
-                </a>
-              </li>
-              <li>
-                <a th:href="@{/}" class="nav-link px-2 text-dark">
-                  Home
-                </a>
-              </li>
-              <li class="nav-item active">
+                  <a
+                    href=""
+                    class="nav-link px-2 text-dark btn"
+                    th:href="@{/index/department/{id}(id = ${department.id})}"
+                    th:text="${department.name}"
+                  ></a>
+                </div>
+               
+                <div class="nav-link text-dark">
+                  <a th:href="@{/}" class="nav-link px-1 text-dark btn">
+                    Home
+                  </a>
+                </div>
+              <div class="nav-link px-2 text-dark">
                 <a
-                  class="nav-link px-2 text-dark"
-                  sec:authorize="hasRole('ADMIN')"
-                  th:href="@{/admin/product}"
+                  th:href="@{/login}"
+                  sec:authorize="isAnonymous()"
+                  class=" nav-link px-2 btn text-dark "
+                >
+                  Login
+                </a>
+              </div>
+              <div class="nav-link px-2 text-dark">
+                <a
+                  class="nav-link px-2 text-dark btn "
+                  sec:authorize="isAuthenticated()"
+                  th:href="@{/logout}"
                   href="#"
                 >
-                  Admin
+                  Logout
                 </a>
-              </li>
-            </ul>
-            <div class="text-end">
-              <a
-                th:href="@{/login}"
-                sec:authorize="isAnonymous()"
-                class="btn btn-outline-light me-2 text-dark"
-              >
-                Login
-              </a>
-            </div>
-            <div class="text-end">
-              <a
-                class="nav-link px-2 text-dark"
-                sec:authorize="isAuthenticated()"
-                th:href="@{/logout}"
-                href="#"
-              >
-                Logout
-              </a>
-            </div>
-            <div class="col-sm-3 pt-4">
-              <form th:action="@{/search}" class="form-inline mb-2">
-                <div>
-                  <input
-                    type="text"
-                    id="txtSearch"
-                    name="keyword"
-                    class="form-control"
-                  />
+              </div>
+                <div class="nav-link">
+                  <a
+                    class="nav-link  text-dark btn "
+                    sec:authorize="hasRole('ADMIN')"
+                    th:href="@{/admin/product}"
+                    href="#"
+                  >
+                    Admin
+                  </a>
                 </div>
-                <div>
-                  <input
-                    style="
-                      background-color: #ffc107 !important;
-                      color: black;
-                      margin-left: 1rem;
-                    "
-                    @keypress.enter.prevent
-                    type="submit"
-                    value="Go"
-                    class="btn form-control"
-                  />
-                </div>
-              </form>
+              </ul></div>
             </div>
           </div>
         </div>
       </header>
     </div>
-    <!-- <div th:fragment="userValidation">
-      <span>Invalid email/password</span>
-    </div> -->
+  
 
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -128,5 +131,9 @@
       integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      document.getElementById('search').disabled = true
+    </script>
   </body>
 </html>

@@ -22,30 +22,28 @@
     />
     <title>Login</title>
   </head>
-  <body style="background-color: #f1f5f8;">
+  <body style="background-color: #f1f5f8 !important;">
     <section th:replace="fragment :: header"></section>
-    <div class="container">
+    <div class="container" style="background-color: #f1f5f8 !important;">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Login</h2>
+          <h5 style="font-size: 1.2rem; margin-top: 1rem;">Login</h5>
 
           <form th:action="@{/login}" method="post">
             <div class="form-group">
-              <label for="email">Email</label>
               <input
                 type="email"
                 name="email"
                 id="email"
                 placeholder="Your Email"
-                class="form-control form-control-lg"
+                class="form-control form-control"
               />
             </div>
 
             <div class="form-group">
-              <label for="password">Password</label>
               <input
                 type="password"
-                class="form-control form-control-lg"
+                class="form-control form-control"
                 placeholder="Password"
                 name="password"
                 id="password"
@@ -72,11 +70,7 @@
               </a>
             </span>
             <br />
-            <a
-              class="linkControl"
-              href="./password.html"
-              th:href="@{/password}"
-            >
+            <a class="linkControl" th:href="@{/forgotPassword}">
               Forgot password?
             </a>
           </form>

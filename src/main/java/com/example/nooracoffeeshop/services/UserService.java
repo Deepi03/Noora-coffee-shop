@@ -51,11 +51,11 @@
 // userRepository.save(user);
 // }
 
-// // public void resetPassword(String email, String password) {
-// // User user = userRepository.findByEmail(email);
-// // user.setPassword(passwordEncoder.encode(password));
-// // userRepository.save(user);
-// // }
+// public void resetPassword(String email, String password) {
+// User user = userRepository.findByEmail(email);
+// user.setPassword(passwordEncoder.encode(password));
+// userRepository.save(user);
+// }
 
 // public void deleteUser(Long id) {
 // userRepository.deleteById(id);

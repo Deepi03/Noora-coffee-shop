@@ -89,18 +89,19 @@ public class ProductController {
             model.addAttribute("products", productList);
             model.addAttribute("currentPage", pageno);
             model.addAttribute("totalPages", productList.getTotalPages());
-            System.out.println("****" + productList.getTotalPages() + "*****");
             model.addAttribute("totalItem", productList.getTotalElements());
+            model.addAttribute("departments", departmentService.listAll());
         }
         return "index";
     }
 
-    @GetMapping("/coffeemachines")
-    public String getAllCoffeemachines(Model model) {
-        // List<Long> coffeemachines = Arrays.asList(3L,4l,5L);
-        // List<Product> products = productService.getAllCoffeeMachines(coffeemachines);
-        // model.addAttribute("coffeemachines", products);
-        return "coffeemachines";
+    @GetMapping("/index/department/{id}")
+    public String shopByCategory(Model model, @PathVariable Long id) {
+
+        model.addAttribute("products",
+                productService.getAllProductsByDepartmentId(id));
+        model.addAttribute("departments", departmentService.listAll());
+        return "index";
 
     }
 

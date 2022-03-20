@@ -4,3 +4,9 @@ insert into product (department_id, description, image_name, manufacturer_id, na
 2022-03-18 11:18:33 jdbc[14]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Filter coffee (or American style) is a slow pleasure, often associated with the idea of a quiet and prolonged break, the ideal ... (318)"; SQL statement:
 insert into product (department_id, description, image_name, manufacturer_id, name, price, supplier_id, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22001-200]
+2022-03-20 15:54:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Hario Double Mesh Metal Dripper V60-01 suodatinsuppilo on The idea was to replace the porcelain V60 filter paper dipper with a ... (282)"; SQL statement:
+insert into product (department_id, description, image_name, manufacturer_id, name, price, supplier_id, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22001-200]
+2022-03-20 16:10:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Find here a great variety of copper and brass coffee pots. With the copper made, coffee pots you can enjoy and taste the perfec... (280)"; SQL statement:
+insert into product (department_id, description, image_name, manufacturer_id, name, price, supplier_id, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22001-200]

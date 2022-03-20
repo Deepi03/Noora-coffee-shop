@@ -72,7 +72,7 @@ public class UserController {
 
         user.setRoles(roles);
         userRepository.save(user);
-        // request.login(user.getEmail(), password);
+        request.login(user.getEmail(), password);
         return "redirect:/";
     }
 
