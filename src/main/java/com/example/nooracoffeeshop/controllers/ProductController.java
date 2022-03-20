@@ -8,12 +8,11 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
-// import com.example.nooracoffeeshop.Repositories.ImageRepository;
 import com.example.nooracoffeeshop.Repositories.ProductRepository;
 
 import com.example.nooracoffeeshop.model.Product;
 import com.example.nooracoffeeshop.services.DepartmentService;
-// import com.example.nooracoffeeshop.services.ImageService;
+
 import com.example.nooracoffeeshop.services.ManufacturerService;
 import com.example.nooracoffeeshop.services.ProductService;
 import com.example.nooracoffeeshop.services.SupplierService;
@@ -49,17 +48,11 @@ public class ProductController {
     @Autowired
     private SupplierService supplierService;
 
-    // @Autowired
-    // private ImageRepository imageRepository;
-
     @Autowired
     private ProductRepository productRepository;
 
     @GetMapping({ "/", "/index" })
     public String index(Model model) {
-
-        // model.addAttribute("products", this.productService.listAll());
-        // return "index";
 
         return findPaginagted(0, model, null);
     }
@@ -67,9 +60,6 @@ public class ProductController {
     @GetMapping("/search")
     public String search(Model model, @RequestParam String keyword) {
 
-        // model.addAttribute("products", this.productService.listAll());
-        // return "index";
-        System.out.println("*******" + keyword + "******");
         return findPaginagted(0, model, keyword);
     }
 
@@ -77,7 +67,7 @@ public class ProductController {
     public String findPaginagted(@PathVariable int pageno, Model model, @Param("keyword") String keyword) {
 
         if (keyword != null) {
-            System.out.println("*****" + pageno + "*****");
+
             Page<Product> productList = productService.getProductPaginate(pageno, 6);
             model.addAttribute("products", productService.listAll(keyword));
             model.addAttribute("currentPage", pageno);
@@ -105,23 +95,13 @@ public class ProductController {
 
     }
 
-    @GetMapping("/consumerproducts")
-    public String getAllConsumerProducts(Model model) {
-        // List<Long> consumerproducts = Arrays.asList(6L, 7L);
-        // List<Product> products =
-        // productService.getAllConsumerProducts(consumerproducts);
-        // model.addAttribute("consumerproducts", products);
-        return "consumerproducts";
+    @GetMapping("/index/viewproduct/{id}")
+    public String viewProduct(Model model, @PathVariable Long id) {
+        model.addAttribute("product", productService.getProduct(id));
+
+        return "viewProduct";
     }
-
-    // @GetMapping("/consumerproducts/coffees")
-    // public String getAllCoffees(Model model){
-    // List<Long> coffees = Arrays.asList(8L, 9L);
-    // List<Product> products = productService.getAllCoffees(coffees);
-    // model.addAttribute("coffees", products);
-    // return "consumerproducts";
-    // }
-
+    ///////////////////// ADMIN ////////////////////////////
     // ***** product management ******
 
     // add product
