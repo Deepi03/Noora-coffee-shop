@@ -57,25 +57,12 @@
           </h2>
 
           <p th:text="${product.description}"></p>
-          <a href="" class="btn btn-warning">
+          <a
+            th:href="@{/addToCart/{id}(id = ${product.id})}"
+            class="btn btn-warning"
+          >
             Add to cart
           </a>
-          <!-- <h4>
-            <a
-              class="btn"
-              th:href="${product.manufacturer.url}"
-              th:text="${product.manufacturer.name}"
-              target="_blank"
-              style="
-                text-decoration: none;
-                background-color: #d67d3e !important;
-                color: #9c0f48;
-                height: auto;
-                width: 100px;
-                margin-top: 20px;
-              "
-            ></a>
-          </h4> -->
         </div>
       </div>
     </div>

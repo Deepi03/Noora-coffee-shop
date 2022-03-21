@@ -26,7 +26,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/shop/**", "/index/**", "/search/**", "/coffeemachines", "/consumerproducts",
                         "/register",
                         "/forgotPassword",
-                        "/h2-console/**", "/productImages/**")
+                        "/h2-console/**", "/productImages/**", "/cart/**")
                 .permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()

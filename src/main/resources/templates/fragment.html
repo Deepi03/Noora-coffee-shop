@@ -13,6 +13,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+  
     <style>
       a {
         text-decoration: none;
@@ -20,8 +21,8 @@
     </style>
   </head>
   <body>
-    <div th:fragment="banner">
-      <header class="p-3 bg-light text-dark">
+ 
+      <header class="p-3 bg-light text-dark"  th:fragment="banner">
         <div class="container">
           <div
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
@@ -33,9 +34,9 @@
             >
               <h2>Noora coffee shop</h2>
             </a>
-            <div class="d-flex flex-wrap nav-link px-2 text-dark" style="margin-left: 45px;margin-top:10px;">
+            <div class="d-flex flex-wrap nav-link px-2 text-dark" style="margin-left: 48px;margin-top:10px;">
                 <form th:action="@{/search}" class="form-inline mb-2 form-floating">
-                  <div class="">
+                  <div class="nav-link" style="margin-left: -44px; margin-top: 0rem;">
                     <input
                       type="text"
                       id="txtSearch"
@@ -47,7 +48,7 @@
                   </div>
                   <div>
                     <input
-                      style="color: black;margin-left: 0.25rem;font-size: 0.7rem;"
+                      style="color: black;margin-left: -0.75rem;font-size: 0.7rem;"
                       @keypress.enter.prevent
                       type="submit"
                       value="Go"
@@ -55,7 +56,15 @@
                     />
                   </div>
                 </form>
-              </div>
+               
+                <div class="nav-link">
+                  <a class="nav-link  text-dark btn" style="font-size: 0.8rem;margin-left: -20px;"
+                  th:href="@{/cart}">Cart</a>
+                
+                </div>
+               
+               </div>
+              
             <div style=" margin-left: 220px;">
   
               <ul
@@ -107,13 +116,75 @@
                     Admin
                   </a>
                 </div>
+                
+            
               </ul></div>
             </div>
           </div>
         </div>
       </header>
-    </div>
+
+     <section th:fragment = "loginBanner">
+       <div class="container">
+          <div
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+          >
+            <a
+          
+              th:href="@{/}"
+              class="d-flex align-items-center justify-content-center mb-2 mb-lg-0 text-warning text-decoration-none"
+            >
+              <h2>Noora coffee shop</h2>
+            </a>
+              
+                <div class="nav-link text-dark">
+                  <a th:href="@{/}" class="nav-link px-1 text-dark btn">
+                    Home
+                  </a>
+                </div>
+              <div class="nav-link px-2 text-dark">
+                <a
+                  th:href="@{/login}"
+                  sec:authorize="isAnonymous()"
+                  class=" nav-link px-2 btn text-dark "
+                >
+                  Login
+                </a>
+              </div>
+              <div class="nav-link px-2 text-dark">
+                <a
+                  class="nav-link px-2 text-dark btn "
+                  sec:authorize="isAuthenticated()"
+                  th:href="@{/logout}"
+                  href="#"
+                >
+                  Logout
+                </a>
+              </div>
+                <div class="nav-link">
+                  <a
+                    class="nav-link  text-dark btn "
+                    sec:authorize="hasRole('ADMIN')"
+                    th:href="@{/admin/product}"
+                    href="#"
+                  >
+                    Admin
+                  </a>
+                </div>
+            
+          </div>
+         </div>
+          </div>
+        </div>
+     </section>
   
+
+      <script
+      defer=""
+      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+      integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+      crossorigin="anonymous"
+    ></script>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -125,13 +196,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script
-      defer=""
-      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-      integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
-      crossorigin="anonymous"
-    ></script>
-
+    
     <script>
       document.getElementById('search').disabled = true
     </script>

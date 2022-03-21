@@ -56,7 +56,7 @@
                     <a th:href="@{/index/viewproduct/{id}(id=${product.id})}"
                     
                     class="btn btn-warning" style="color: black;">View product</a>
-                    <a   class="btn btn-warning" style="color: black;">Add to cart</a>
+                    <a  th:href="@{/addToCart/{id}(id = ${product.id})}"  class="btn btn-warning" style="color: black;">Add to cart</a>
                   </div>
                 </div>
               </div>
@@ -102,5 +102,6 @@
       integrity="sha38 -wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+     
   </body>
 </html>
