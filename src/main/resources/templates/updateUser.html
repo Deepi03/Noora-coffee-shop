@@ -8,7 +8,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #f1f5f8 !important;">
     <section th:replace = "fragment :: banner" >
     <form th:action="@{'/user/{id}'(id=${user.id})}" method="post">
         <div class="form-floating">
@@ -28,9 +28,7 @@
             <label for="floatingInput">Email address</label>
         </div>
         <input type="submit" value="Add"></input>
-    </form>
-
-    
-<section th:replace="fragment :: footer"></section>
+    </form>   
+   <section th:replace="fragment :: footer"></section>
 </body>
 </html>

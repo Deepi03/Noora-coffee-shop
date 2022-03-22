@@ -23,10 +23,16 @@ public class SupplierController {
   // ***** supplier management ******
 
   // add supplier & display supplier table
+
   @GetMapping("/admin/supplier")
   public String displaySupplier(Model model) {
     model.addAttribute("suppliers", this.supplierService.listAll());
     return "supplierManagement";
+  }
+
+  @GetMapping("/admin/suppliers/add")
+  public String addSupplier(Model model) {
+    return "supplierAdd";
   }
 
   @PostMapping("/admin/supplier")

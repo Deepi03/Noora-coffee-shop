@@ -12,16 +12,16 @@
     </head>
    
 
-<body>
+<body style="background-color: #f1f5f8 !important;">
 
-
+<section th:replace="admin_fragments :: header"></section>
   <main class="form-sign-in">
   <form th:action="@{/admin/updateproduct/{id}(id=${product.id})}" method="post"> 
     <!-- Choosing manufacturer -->
     <div class="form-floating">
-        <select class="form-select" name="manufacturerID" required="true" >
+        <select class="form-select" name="manufacturerID" required="true" style="width: 50%; margin: 1rem;">
             
-            <option th:each = "manufacturer : ${manufacturers}" th:text = "${manufacturer.name}" th:value="${manufacturer.id}"></option>
+            <option th:each = "manufacturer : ${manufacturers}" th:text = "${manufacturer.name}" th:value="${manufacturer.id}" style="width: 50%; margin: 1rem;"></option>
         </select>
         <label for="floatingProductManufacturer">Product Manufacturer</label>
     </div> 
@@ -43,9 +43,9 @@
 
     <!-- Choosing department  -->
     <div class="form-floating">
-        <select class="form-select" name="departmentID" required="true">
+        <select class="form-select" name="departmentID" required="true" style="width: 50%; margin: 1rem;">
             
-            <option th:each = "department : ${departments}" th:text = "${department.name}" th:value="${department.id}"></option>
+            <option th:each = "department : ${departments}" th:text = "${department.name}" th:value="${department.id}" style="width: 50%; margin: 1rem;"></option>
         </select>
         <label for="floatingProductDepartment">Product Department</label>
     </div>
@@ -59,13 +59,15 @@
 
       <!-- Choosing supplier -->
      <div class="form-floating">
-        <select class="form-select" name="supplierID" required="true">
-            <option th:each = "supplier : ${suppliers}" th:text = "${supplier.name}" th:value="${supplier.id}"></option>
+        <select class="form-select" name="supplierID" required="true" style="width: 50%; margin: 1rem;">
+            <option th:each = "supplier : ${suppliers}" th:text = "${supplier.name}" th:value="${supplier.id}" style="width: 50%; margin: 1rem;"></option>
         </select>
         <label for="floatingProduct">Product Supplier</label>
     </div>
-
     <button type="submit" class="btn btn-info add">Update</button>
-</form>
-</main>
+   </form>
+   </main>
+
+<section th:replace="admin_fragments :: footer"></section>
+</body>
 </html>

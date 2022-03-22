@@ -21,13 +21,10 @@
    
 </style>
 </head>
-<body>
+<body style="background-color: #f1f5f8 !important;">
+    <section th:replace="admin_fragments :: header"></section>
     <main class="form-sign-in">
-        <h1 class="h3 mb-3 fw-normal">
-            Supplier Management
-          </h1>
            <form th:action="@{/admin/updatesupplier/{id}(id=${supplier.id})}"  method="post"> 
-          
           <!-- Supplier name -->
           <div class="form-floating">
               <input type="text" class="form-control" id="floatingSupplierName" name="supplierName"  required placeholder="Supplier name" th:value="${supplier.name}">
@@ -44,10 +41,10 @@
               <label for="floatingContactPersonName">Contact Person Name</label>
           </div>
 
-          <button type="submit" class="btn btn-info add">Add</button>
+          <button type="submit" class="btn btn-info" style="margin-left: 14rem;" >Add</button>
           </form>
           </main>
 
-          
+          <section th:replace="admin_fragments :: footer"></section>
           </body>
           </html>

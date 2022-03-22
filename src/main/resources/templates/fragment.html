@@ -20,9 +20,9 @@
       }
     </style>
   </head>
-  <body>
+  <body  style="background-color:#F1F5F8">
  
-      <header class="p-3 bg-light text-dark"  th:fragment="banner">
+      <header class="p-3 bg-light text-dark"  th:fragment="banner" style="margin-top: -1rem;">
         <div class="container">
           <div
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
@@ -46,7 +46,7 @@
                     />
                     
                   </div>
-                  <div>
+                  <div s>
                     <input
                       style="color: black;margin-left: -0.75rem;font-size: 0.7rem;"
                       @keypress.enter.prevent
@@ -65,7 +65,7 @@
                
                </div>
               
-            <div style=" margin-left: 220px;">
+            <div style=" margin-left: 220px;margin-top: -2rem;">
   
               <ul
                 class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mx-3"
@@ -111,13 +111,10 @@
                     class="nav-link  text-dark btn "
                     sec:authorize="hasRole('ADMIN')"
                     th:href="@{/admin/product}"
-                    href="#"
-                  >
+                    href="#">
                     Admin
                   </a>
                 </div>
-                
-            
               </ul></div>
             </div>
           </div>

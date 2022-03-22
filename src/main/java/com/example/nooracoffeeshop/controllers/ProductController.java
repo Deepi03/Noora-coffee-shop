@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-
 import com.example.nooracoffeeshop.Repositories.ProductRepository;
 
 import com.example.nooracoffeeshop.model.Product;
@@ -87,12 +83,10 @@ public class ProductController {
 
     @GetMapping("/index/department/{id}")
     public String shopByCategory(Model model, @PathVariable Long id) {
-
         model.addAttribute("products",
                 productService.getAllProductsByDepartmentId(id));
         model.addAttribute("departments", departmentService.listAll());
         return "index";
-
     }
 
     @GetMapping("/index/viewproduct/{id}")
@@ -105,14 +99,24 @@ public class ProductController {
     // ***** product management ******
 
     // add product
-    @GetMapping("/admin/product")
+    @GetMapping("/admin/products/add")
     public String showProductAdditionForm(Model model) {
-
         model.addAttribute("manufacturers", manufacturerService.listAll());
         model.addAttribute("departments", departmentService.listAll());
         model.addAttribute("suppliers", supplierService.listAll());
         model.addAttribute("products", productService.listAll());
         model.addAttribute("product", new Product());
+        // also displaying product table
+        return "productAdd";
+    }
+
+    @GetMapping("/admin/product")
+    public String showProducs(Model model) {
+
+        model.addAttribute("manufacturers", manufacturerService.listAll());
+        model.addAttribute("departments", departmentService.listAll());
+        model.addAttribute("suppliers", supplierService.listAll());
+        model.addAttribute("products", productService.listAll());
 
         // also displaying product table
         return "productManagement";
@@ -151,7 +155,7 @@ public class ProductController {
         model.addAttribute("manufacturers", this.manufacturerService.listAll());
         model.addAttribute("departments", this.departmentService.listAll());
         model.addAttribute("suppliers", this.supplierService.listAll());
-
+        model.addAttribute("product", new Product());
         model.addAttribute("product", product);
         return "updateproduct";
 

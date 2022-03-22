@@ -20,10 +20,13 @@ public class ManufacturerController {
 
   @GetMapping("/admin/manufacturer")
   public String displayManufacturer(Model model) {
-
     model.addAttribute("manufacturers", this.manufacturerService.listAll());
-
     return "manufacturerManagement";
+  }
+
+  @GetMapping("/admin/manufacturer/add")
+  public String displayManufacturerAdd(Model model) {
+    return "manufacturerAdd";
   }
 
   @PostMapping("/admin/manufacturer")
