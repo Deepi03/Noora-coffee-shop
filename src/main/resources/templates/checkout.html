@@ -204,15 +204,16 @@
                       </span>
                     </li>
                   </ul>
-                  <form action="" method="post" th:action="@{/payNow}">
-                    <button
-                      type="submit"
-                      style="border-radius: 10px;"
-                      class="btn btn-block btn-warning"
-                    >
-                      Pay Now
-                    </button>
-                  </form>
+
+                  <a
+                    th:href="@{/paynow}"
+                    type="submit"
+                    style="border-radius: 10px;"
+                    class="btn btn-block btn-warning"
+                  >
+                    Pay Now
+                  </a>
+
                   <!-- <form>
                   <a
                     onclick="orderRecieved()"
