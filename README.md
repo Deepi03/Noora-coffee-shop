@@ -21,7 +21,9 @@ Deployment
 <br>
 3.The server ``localhost:8080`` is running
 
-Product prototype
+Hosting
 ---
+By clicking below link you can see my work
+<br>
+https://nooracoffeeshop.herokuapp.com/
 
- <img src="" width="100"/>
