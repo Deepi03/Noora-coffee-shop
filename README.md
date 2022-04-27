@@ -1,5 +1,5 @@
 # Noora-coffee-shop - springboot rest api
---------
+
 Its a coffee shop e-commerce website.You can see collections of coffee machines and coffee related consumer products.Add them to the cart.Also it has login option along with
 forgot password and registration option.
 You can add products to cart and also it has pagination and search and sort options.
