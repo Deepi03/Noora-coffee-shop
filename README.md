@@ -15,11 +15,11 @@ The following tools have been used in this project:
 
 Deployment
 ----
-1. Clone this repository git clone https://github.com/Deepi03/Noora-coffee-shop.git
-<br>
-2. run ``mvn spring-boot:run``
-<br>
-3. The server ``localhost:8080`` is running
+* Clone this repository `git clone https://github.com/Deepi03/Noora-coffee-shop.git`
+
+* run ``mvn spring-boot:run``
+
+* The server ``localhost:8080`` is running
 
 Hosting
 ---
